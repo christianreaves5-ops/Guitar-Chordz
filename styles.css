@@ -23,7 +23,7 @@ html {
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: var(--bg);
+  background: linear-gradient(135deg, #f7f3ee 0%, #eefaf8 100%);
   color: var(--text);
   line-height: 1.5;
   overflow-x: hidden;
@@ -41,6 +41,9 @@ a {
 }
 
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -49,6 +52,7 @@ a {
   border-bottom: 1px solid var(--border);
   background: #fff;
   flex-wrap: wrap;
+  box-shadow: 0 2px 12px rgba(15, 118, 110, 0.08);
 }
 
 .brand {
@@ -83,13 +87,14 @@ a {
 .main-nav a {
   padding: 10px 12px;
   border-radius: 8px;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
 .main-nav a:hover,
 .main-nav a:focus {
   color: var(--text);
   background: #f3f4f6;
+  transform: translateY(-2px);
 }
 
 .btn {
@@ -99,7 +104,13 @@ a {
   font-size: 0.92rem;
   border: 1px solid transparent;
   text-align: center;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.btn:hover,
+.btn:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(15, 118, 110, 0.22);
 }
 
 .btn-primary {
@@ -130,13 +141,13 @@ a {
 .container {
   width: min(1200px, 100%);
   margin: 0 auto;
-  padding: 20px 18px 32px;
+  padding: 32px 18px 32px;
 }
 
 .hero {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
-  gap: 24px;
+  gap: 30px;
   align-items: center;
 }
 
@@ -163,9 +174,9 @@ a {
 .hero-image-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 6px 20px rgba(15, 118, 110, 0.08);
 }
 
 .hero-image-card img {
@@ -173,7 +184,13 @@ a {
   min-height: 220px;
   max-height: 360px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.hero-image-card:hover img {
+  transform: scale(1.03);
+  filter: brightness(1.04);
 }
 
 .section-block {
@@ -206,11 +223,29 @@ a {
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
+.card,
+.chord-card,
+.chord-detail-card,
+.panel,
+.accordion-card,
+.notes-box {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover,
+.chord-card:hover,
+.chord-detail-card:hover,
+.panel:hover,
+.accordion-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(15, 118, 110, 0.12);
+}
+
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 16px;
+  padding: 18px;
   min-height: 120px;
 }
 
@@ -223,7 +258,6 @@ a {
   margin: 0;
   color: var(--muted);
   font-size: 0.92rem;
-  line-height: 1.5;
 }
 
 .mini-icon {
@@ -250,12 +284,20 @@ a {
   font-size: 1rem;
 }
 
-.chord-card img {
+.chord-card img,
+.chord-detail-card img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 8px;
   border: 1px solid var(--border);
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.chord-card:hover img,
+.chord-detail-card:hover img {
+  transform: scale(1.03);
+  filter: brightness(1.04);
 }
 
 .tip-banner {
@@ -292,10 +334,24 @@ a {
   color: var(--text);
 }
 
-/* Chord Library page extras */
-.page-intro h1 {
-  margin: 0;
+.page-intro,
+.page-head {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(15, 118, 110, 0.06);
+}
+
+.page-intro h1,
+.page-head h1 {
+  margin: 0 0 6px;
   font-size: clamp(1.75rem, 4vw, 2.4rem);
+}
+
+.page-head p {
+  margin: 0;
+  color: var(--muted);
 }
 
 .chip-row {
@@ -318,9 +374,10 @@ a {
 
 .chord-detail-card {
   background: #fff;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 12px;
+  padding: 14px;
+  overflow: hidden;
 }
 
 .chord-detail-card .card-top {
@@ -350,24 +407,25 @@ a {
   margin: 8px 0 10px;
   color: #14b8a6;
   font-size: 0.82rem;
+  font-weight: 700;
 }
 
-.mini-link.bottom {
-  margin-top: 10px;
+.mini-link:hover,
+.mini-link:focus {
+  text-decoration: underline;
 }
 
-.chord-detail-card img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
+.chord-note {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .notes-box {
-  margin-top: 20px;
+  margin-top: 24px;
   background: #fff;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 16px;
 }
@@ -380,20 +438,13 @@ a {
 .notes-box ul {
   margin: 0;
   padding-left: 18px;
-  color: #6b7280;
+  color: var(--muted);
   line-height: 1.6;
   font-size: 0.95rem;
 }
 
-/* Extra page styles kept from original file */
-.page-head h1 {
-  margin: 10px 0 6px;
-  font-size: 1.9rem;
-}
-
-.page-head p {
-  margin: 0;
-  color: var(--muted);
+.notes-box strong {
+  color: var(--teal-dark);
 }
 
 .two-col {
@@ -566,6 +617,7 @@ a {
   padding: 16px;
   display: grid;
   gap: 14px;
+  margin-top: 16px;
 }
 
 .form-card label {
@@ -617,7 +669,6 @@ a {
   width: 100%;
 }
 
-/* Tablet */
 @media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
@@ -631,10 +682,7 @@ a {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .two-col {
-    grid-template-columns: 1fr;
-  }
-
+  .two-col,
   .acc-grid {
     grid-template-columns: 1fr;
   }
@@ -650,7 +698,6 @@ a {
   }
 }
 
-/* Mobile */
 @media (max-width: 600px) {
   .container {
     padding: 16px 14px 28px;
@@ -689,13 +736,6 @@ a {
     grid-template-columns: 1fr;
   }
 
-  .card,
-  .chord-card,
-  .chord-detail-card,
-  .notes-box {
-    padding: 14px;
-  }
-
   .section-title,
   .section-subtitle {
     text-align: left;
@@ -710,101 +750,4 @@ a {
     flex-direction: column;
     gap: 8px;
   }
-}
-
-/* Survey-based improvements */
-body {
-  background: linear-gradient(135deg, #f7f3ee 0%, #eefaf8 100%);
-}
-
-.container {
-  padding-top: 32px;
-}
-
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  box-shadow: 0 2px 12px rgba(15, 118, 110, 0.08);
-}
-
-.main-nav a,
-.btn,
-.card,
-.chord-card,
-.chord-detail-card,
-.panel,
-.accordion-card,
-.notes-box {
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-}
-
-.main-nav a:hover,
-.main-nav a:focus {
-  transform: translateY(-2px);
-}
-
-.btn:hover,
-.btn:focus {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(15, 118, 110, 0.22);
-}
-
-.card:hover,
-.chord-card:hover,
-.chord-detail-card:hover,
-.panel:hover,
-.accordion-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(15, 118, 110, 0.12);
-}
-
-.chord-detail-card {
-  overflow: hidden;
-}
-
-.chord-detail-card img,
-.chord-card img,
-.hero-image-card img {
-  transition: transform 0.25s ease, filter 0.25s ease;
-}
-
-.chord-detail-card:hover img,
-.chord-card:hover img,
-.hero-image-card:hover img {
-  transform: scale(1.03);
-  filter: brightness(1.04);
-}
-
-.chord-note {
-  margin: 10px 0 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.page-intro,
-.page-head {
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: 0 6px 20px rgba(15, 118, 110, 0.06);
-}
-
-.notes-box {
-  margin-top: 24px;
-}
-
-.notes-box strong {
-  color: var(--teal-dark);
-}
-
-.mini-link {
-  font-weight: 700;
-}
-
-.mini-link:hover,
-.mini-link:focus {
-  text-decoration: underline;
 }
