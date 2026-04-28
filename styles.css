@@ -711,3 +711,100 @@ a {
     gap: 8px;
   }
 }
+
+/* Survey-based improvements */
+body {
+  background: linear-gradient(135deg, #f7f3ee 0%, #eefaf8 100%);
+}
+
+.container {
+  padding-top: 32px;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 12px rgba(15, 118, 110, 0.08);
+}
+
+.main-nav a,
+.btn,
+.card,
+.chord-card,
+.chord-detail-card,
+.panel,
+.accordion-card,
+.notes-box {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.main-nav a:hover,
+.main-nav a:focus {
+  transform: translateY(-2px);
+}
+
+.btn:hover,
+.btn:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(15, 118, 110, 0.22);
+}
+
+.card:hover,
+.chord-card:hover,
+.chord-detail-card:hover,
+.panel:hover,
+.accordion-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(15, 118, 110, 0.12);
+}
+
+.chord-detail-card {
+  overflow: hidden;
+}
+
+.chord-detail-card img,
+.chord-card img,
+.hero-image-card img {
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.chord-detail-card:hover img,
+.chord-card:hover img,
+.hero-image-card:hover img {
+  transform: scale(1.03);
+  filter: brightness(1.04);
+}
+
+.chord-note {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.page-intro,
+.page-head {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(15, 118, 110, 0.06);
+}
+
+.notes-box {
+  margin-top: 24px;
+}
+
+.notes-box strong {
+  color: var(--teal-dark);
+}
+
+.mini-link {
+  font-weight: 700;
+}
+
+.mini-link:hover,
+.mini-link:focus {
+  text-decoration: underline;
+}
