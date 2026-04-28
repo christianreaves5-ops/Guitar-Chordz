@@ -7,7 +7,10 @@
   <link rel="stylesheet" href="styles.css" />
 
   <style>
-    .center-narrow { max-width: 760px; margin: 0 auto; }
+    .center-narrow {
+      max-width: 760px;
+      margin: 0 auto;
+    }
   </style>
 </head>
 <body>
@@ -25,7 +28,7 @@
       <a href="survey.html">Survey</a>
     </nav>
 
-    <a href="#" class="btn btn-primary" style="min-width:110px; text-align:center;">Start Practice</a>
+    <a href="practice.html" class="btn btn-primary header-cta">Start Practice</a>
   </header>
 
   <main class="container center-narrow">
@@ -34,30 +37,35 @@
       <p>Help improve the beginner guide.</p>
     </section>
 
-    <form class="form-card">
+    <form class="form-card" action="https://wp.zybooks.com/form-viewer.php" method="POST">
+      <label>
+        First and Last Name
+        <input type="text" name="fullName" placeholder="Enter your name" />
+      </label>
+
       <label>
         Experience Level
-        <input type="text" placeholder="0–1 month, 1–3 months, etc." />
+        <input type="text" name="experienceLevel" placeholder="0–1 month, 1–3 months, etc." />
       </label>
 
       <label>
         Hardest Chord
-        <input type="text" placeholder="G, C, D, Em, Am..." />
+        <input type="text" name="hardestChord" placeholder="G, C, D, Em, Am..." />
       </label>
 
       <fieldset class="check-fieldset">
-        <legend>Biggest issues (select all that apply)</legend>
+        <legend>Biggest issues</legend>
 
-        <label class="check-row"><input type="checkbox" /> Buzzing strings</label>
-        <label class="check-row"><input type="checkbox" /> Finger pain</label>
-        <label class="check-row"><input type="checkbox" /> Slow chord switching</label>
-        <label class="check-row"><input type="checkbox" /> Finger placement</label>
-        <label class="check-row"><input type="checkbox" /> Strumming rhythm</label>
+        <label class="check-row"><input type="checkbox" name="issue" value="buzzing" /> Buzzing strings</label>
+        <label class="check-row"><input type="checkbox" name="issue" value="pain" /> Finger pain</label>
+        <label class="check-row"><input type="checkbox" name="issue" value="switching" /> Slow chord switching</label>
+        <label class="check-row"><input type="checkbox" name="issue" value="placement" /> Finger placement</label>
+        <label class="check-row"><input type="checkbox" name="issue" value="rhythm" /> Strumming rhythm</label>
       </fieldset>
 
       <label>
         Additional Comments
-        <textarea placeholder="Share your thoughts, suggestions, or challenges..."></textarea>
+        <textarea name="comments" placeholder="Share your thoughts, suggestions, or challenges..."></textarea>
       </label>
 
       <button class="btn btn-primary btn-wide" type="submit">Submit Survey</button>
@@ -67,9 +75,9 @@
   <footer class="site-footer">
     <p>© 2026 ChordStart. All rights reserved.</p>
     <div class="footer-links">
-      <a href="practice.html">Privacy</a>
-      <a href="practice.html">Terms</a>
-      <a href="practice.html">Contact</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
     </div>
   </footer>
 </body>
