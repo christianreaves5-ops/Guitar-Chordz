@@ -43,11 +43,45 @@
         <h2>10-Minute Routine</h2>
 
         <ol class="step-list">
-          <li><span class="step-dot">1</span><div><strong>Tune your guitar</strong><span class="step-time">1 min</span></div></li>
-          <li><span class="step-dot">2</span><div><strong>Warm up fingers</strong><span class="step-time">2 min</span></div></li>
-          <li><span class="step-dot">3</span><div><strong>Practice chord shapes</strong><span class="step-time">3 min</span></div></li>
-          <li><span class="step-dot">4</span><div><strong>Switching drills</strong><span class="step-time">3 min</span></div></li>
-          <li><span class="step-dot">5</span><div><strong>Play a simple song or pattern</strong><span class="step-time">1 min</span></div></li>
+          <li>
+            <span class="step-dot">1</span>
+            <div>
+              <strong>Tune your guitar</strong>
+              <span class="step-time">1 min</span>
+            </div>
+          </li>
+
+          <li>
+            <span class="step-dot">2</span>
+            <div>
+              <strong>Warm up fingers</strong>
+              <span class="step-time">2 min</span>
+            </div>
+          </li>
+
+          <li>
+            <span class="step-dot">3</span>
+            <div>
+              <strong>Practice chord shapes</strong>
+              <span class="step-time">3 min</span>
+            </div>
+          </li>
+
+          <li>
+            <span class="step-dot">4</span>
+            <div>
+              <strong>Switching drills</strong>
+              <span class="step-time">3 min</span>
+            </div>
+          </li>
+
+          <li>
+            <span class="step-dot">5</span>
+            <div>
+              <strong>Play a simple song or pattern</strong>
+              <span class="step-time">1 min</span>
+            </div>
+          </li>
         </ol>
       </article>
 
@@ -65,10 +99,12 @@
         </ul>
 
         <div class="timer-box">
-          <div class="timer-title">Timer Placeholder</div>
+          <div class="timer-title">Practice Timer</div>
+
           <div class="timer-row">
-            <span class="timer-inline">00:00</span>
-            <button class="btn btn-primary btn-sm">Start</button>
+            <span class="timer-inline" id="timerDisplay">10:00</span>
+            <button class="btn btn-primary btn-sm" id="startTimer" type="button">Start</button>
+            <button class="btn btn-outline btn-sm" id="resetTimer" type="button">Reset</button>
           </div>
         </div>
       </article>
@@ -93,5 +129,55 @@
       <a href="#">Contact</a>
     </div>
   </footer>
+
+  <script>
+    let timeLeft = 600;
+    let timerInterval = null;
+
+    const timerDisplay = document.getElementById("timerDisplay");
+    const startTimer = document.getElementById("startTimer");
+    const resetTimer = document.getElementById("resetTimer");
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+
+      timerDisplay.textContent =
+        String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
+    }
+
+    startTimer.addEventListener("click", function () {
+      if (timerInterval !== null) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        startTimer.textContent = "Start";
+        return;
+      }
+
+      startTimer.textContent = "Pause";
+
+      timerInterval = setInterval(function () {
+        if (timeLeft > 0) {
+          timeLeft--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          startTimer.textContent = "Start";
+          alert("Practice session finished!");
+        }
+      }, 1000);
+    });
+
+    resetTimer.addEventListener("click", function () {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      timeLeft = 600;
+      startTimer.textContent = "Start";
+      updateTimerDisplay();
+    });
+
+    updateTimerDisplay();
+  </script>
 </body>
 </html>
